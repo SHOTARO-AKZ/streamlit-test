@@ -92,7 +92,7 @@ if st.button("実行"):
         # 現在時刻の首都圏鉄道各社の事故・トラブル情報をAIで取得
         try:
             from langchain.llms import OpenAI
-            now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+            now = datetime.now().strftime("%Y-%m-%d %H:%M")
             prompt = f"""{now}時点での首都圏(東京都、千葉県、埼玉県、茨城県、群馬県、神奈川県、山梨県、静岡県(静岡駅より西は除外))の鉄道各社の事故・トラブル情報を、実行時点で公表されているものだけ、会社名・路線名・時刻を冒頭に含めて簡潔に日本語で箇条書きでまとめてください。情報がなければ「現在、首都圏の鉄道各社で大きな事故・トラブル情報はありません」とだけ出力してください。\n\n【出力例】\n・JR東日本 山手線 12:34 運転見合わせ(新宿〜池袋間で人身事故)\n・東京メトロ 東西線 13:10 遅延(信号トラブル)\n・…"""
             llm = OpenAI(openai_api_key=openai_api_key, temperature=0.2)
             result = llm(prompt)
@@ -100,7 +100,7 @@ if st.button("実行"):
             lines = [l.strip() for l in result.split("\n") if l.strip()]
             # 情報がない場合の判定と表示
             info_found = False
-            now_disp = datetime.datetime.now().strftime("%m月%d日 %H:%M")
+            now_disp = datetime.now().strftime("%m月%d日 %H:%M")
             info_found = False
             import re
             # 時刻抽出用関数
