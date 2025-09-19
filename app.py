@@ -32,11 +32,13 @@ selected_item = st.radio(
 st.divider()
 
 import datetime
+import pytz
 if selected_item == "駅間ルート検索":
     origin = st.text_input(label="出発駅（最寄駅）を入力してください。")
     destination = st.text_input(label="到着駅（目的駅）を入力してください。")
 else:
-    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+    # サーバのローカルタイムゾーンで現在時刻を取得
+    now = datetime.datetime.now(datetime.timezone.utc).astimezone().strftime("%Y-%m-%d %H:%M")
     st.write(f"現在時刻: {now}")
     st.info("『実行』ボタンで、首都圏の鉄道各社の事故・トラブル情報を取得します。")
 
